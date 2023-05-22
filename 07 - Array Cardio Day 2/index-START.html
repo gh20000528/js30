@@ -28,15 +28,42 @@
     // Some and Every Checks
     // Array.prototype.some() // is at least one person 19 or older?
     // Array.prototype.every() // is everyone 19 or older?
-
+      //some檢查陣列中有沒有
+    const ans = people.some((p) => {
+      //getUTCFullYear()返回此日期的年份
+      return new Date().getUTCFullYear() - p.year >= 19
+    })
+    console.log(ans);
+      //every檢查每一個
+    const ans1 = people.every((p) => {
+      //getUTCFullYear()返回此日期的年份
+      return new Date().getUTCFullYear() - p.year >= 19
+    })
+    console.log(ans1);
     // Array.prototype.find()
     // Find is like filter, but instead returns just the one you are looking for
     // find the comment with the ID of 823423
+    const ans2 = comments.find(comment =>  comment.id === 823423 )
+    console.log(ans2);
 
     // Array.prototype.findIndex()
     // Find the comment with this ID
+    const ans3 = comments.findIndex(comment =>  comment.id === 823423 )
+    console.log(ans3);
     // delete the comment with the ID of 823423
+    const ans4 = comments.splice(ans3 , 1)
+    console.log(ans4 , comments)
 
+    //取得ans3以前
+    const ans5 = comments.slice(0 , ans3)
+    //取得ans3以後
+    const ans6 = comments.slice(ans3 + 1)
+    //也可以利用解構在存到ans7
+    const ans7 = [...comments.slice(0 , ans3) , ...comments.slice(ans3 + 1)]
+
+    const ans8 = [...comments].splice(ans3 , 1)
+
+    console.log(ans7 ,ans8 , comments);
   </script>
 </body>
 </html>
