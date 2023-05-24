@@ -97,6 +97,35 @@
   </div>
 
 <script>
+  (function(){
+    const checkboxs = Array.from(
+      document.querySelectorAll('.inbox input[type="checkbox"]')
+    )
+
+    let lastCheck = null
+
+    function clickHandler(e){
+      if (this.checked){
+        if(e.shiftKey && lastCheck !== null){
+          let newCheck = checkboxs.indexOf(this)
+          checkboxs.slice(
+            Math.min(lastCheck, newCheck),
+            Math.max(lastCheck, newCheck)
+          ).forEach(input => {
+            input.checked = true
+          })
+        }
+        lastCheck = checkboxs.indexOf(this)
+      }else{
+        lastCheck = null
+      }
+    }
+
+
+    checkboxs.forEach( input =>{
+      input.addEventListener('click', clickHandler)
+    })
+  })()
 </script>
 </body>
 </html>
