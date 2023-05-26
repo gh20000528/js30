@@ -102,13 +102,17 @@
     const checkboxs = Array.from(
       document.querySelectorAll('.inbox input[type="checkbox"]')
     )
-
+    //記錄區間的頭
     let lastCheck = null
 
     function clickHandler(e){
+      //如果是選取的
       if (this.checked){
+        //shift按住 and lastCheck不是空值
         if(e.shiftKey && lastCheck !== null){
+          //取得現在的
           let newCheck = checkboxs.indexOf(this)
+          //用slice去比較
           checkboxs.slice(
             Math.min(lastCheck, newCheck),
             Math.max(lastCheck, newCheck)
