@@ -14,7 +14,15 @@ const secretCode = 'wesbos';
 window.addEventListener('keyup', (e) => {
   console.log(e.key);
   pressed.push(e.key);
+  //利用數學運算減少判斷式
   pressed.splice(-secretCode.length - 1, pressed.length - secretCode.length);
+  // 1   -11 , -9
+  // 2   -11 , -8
+  // .
+  // .
+  // .
+  // 10  -11 , 0
+  // 11  -11 , 1
   if (pressed.join('').includes(secretCode)) {
     console.log('DING DING!');
     cornify_add();
