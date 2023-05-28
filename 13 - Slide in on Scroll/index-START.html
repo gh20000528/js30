@@ -59,6 +59,21 @@
       };
     }
 
+
+    let images = document.querySelectorAll('img')
+
+    function scrollHandler(){
+      let windowTop = window.scrollY
+      let windwButton = window + window.innerHeight
+
+      images.forEach( img => {
+        if (img.offsetTop + img.height / 2 < windwButton && img.offsetTop + img.height / 2 > windowTop) {
+          img.classList.add('active')
+        }
+      })
+    }
+
+    window.addEventListener("scroll",scrollHandler)
   </script>
 
   <style>
