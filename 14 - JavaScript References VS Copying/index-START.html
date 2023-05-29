@@ -9,40 +9,166 @@
 
   <script>
     // start with strings, numbers and booleans
+    //字串 , 數字 , 布林
+    let a = 'A'
+    let b = a
 
+    a = 'B'
+    console.log(a , b) // B , A
+
+    let c = 0
+    let d = c
+    c++
+
+    console.log(c , d) // 1 , 0
+
+    let e = true
+    let f = e
+    // e = false
+    e = !f
+
+    console.log(e , f) // false , true
+
+    let g = "A";
+    let h = "A";
+    let i = "A";
+    h = "B", i = "C", g += h, g += i;
+    console.log(g, h, i); //ABC , B ,C
     // Let's say we have an array
     const players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
 
+    //會修改到資料本身
+    // let playerTwo = players
+    // playerTwo[0] = "jojo"
+
+    // console.log(players , playerTwo);
+
+    //不會修改到資料,利用slice可達到複製,因為slice會額外再產生一個新的陣列
+    let playerThree = players.slice()
+    playerThree[0] = "jojo"
+
+    console.log(playerThree , players)
+
+    //被用來合併兩個或多個陣列。此方法不會改變現有的陣列,會回傳呼叫者陣列本身,也就是與players的值合併後的空陣列。
+    let playerFour = [].concat(players)
+    playerFour[0] = "jojo"
+
+    console.log(playerFour , players)
+
+    //解構賦值,將players解構取值,在合併至player2,回傳一個新的陣列
+    let playerFive = [...players]
+    playerFive[0] = "jojo"
+
+    console.log(playerFive , players)
+
+
+    function createObj(name) {
+      return {
+        name
+      };
+    }
+
+    let pr1 = createObj("johnny");
+    let pr2 = createObj("lisa");
+    let pr3 = createObj("iggy");
+
+    let gr1 = [pr1, pr2, pr3];
+    let gr2 = gr1.slice();
+    // 由於gr2[0]值為pr1，所以他會去改變gr2[0].name，也就是pr1的值，那我再次獲取gr1，它裡面的pr1也會是改變後的值。
+    gr2[0].name = "momo";
+    console.log(gr1, gr2); // (3) ["momo", "lisa", "iggy"] 
+
+    // 但如果改為這樣，可發現兩者已互不影響，因為記憶體發現我們的記憶體中並無momo這個值，所以他會創建一個momo的值，並給予他一個記憶體空間，而後我們gr2[0](也就是gr2的pr1)就會指向他，並不影響。
+    gr2[0] = "momo";
+    console.log(gr1, gr2); // (3) ["johnny", "lisa", "iggy"]  (3) ["momo", "lisa", "iggy"] 
+
+    
+    
     // and we want to make a copy of it.
-
+    
     // You might think we can just do something like this:
-
+    
     // however what happens when we update that array?
-
+    
     // now here is the problem!
-
+    
     // oh no - we have edited the original array too!
-
+    
     // Why? It's because that is an array reference, not an array copy. They both point to the same array!
-
+    
     // So, how do we fix this? We take a copy instead!
-
+    
     // one way
-
+    
     // or create a new array and concat the old one in
-
+    
     // or use the new ES6 Spread
-
+    
     // now when we update it, the original one isn't changed
-
+    
     // The same thing goes for objects, let's say we have a person object
-
+    
     // with Objects
-    const person = {
+    //接下來是物件之間的複製與賦值
+    let someone = {
       name: 'Wes Bos',
       age: 80
     };
+    let p1 = someone
+    // 查看記憶體無XXX後，創建一個XXX的值並賦予記憶體空間，接著person在指向他，而與p1互不影響。
+    someone = "XXX"
+    console.log(someone , p1)
 
+    // 前面步驟與上面一樣，不同的是會改變person.name的值也就是0x1的name，因此p1也會受影響，因為p1指向的也是person所指向的0x1。
+    someone.name = "XXX";
+    console.log(someone, p1)
+
+
+    let x = {
+      name: "bogi",
+      age: 87
+    };
+    let y = {
+      name: "dandy"
+    };
+    let z = Object.assign(x, y)//Object.assign(x, y)將y的name屬性複製到x中，並返回了修改後的x物件。因此，z變數被賦值為x物件
+
+    console.log(z) // {name: "dandy", age: 87}
+
+
+    let k = {
+      name: "eva",
+      age: 22,
+      eat: function () {
+        console.log("amazing")
+      }
+    };
+
+    let kk = JSON.parse(JSON.stringify(k))
+    console.log(kk)
+
+
+    const wes = {
+      name: 'Wes',
+      age: 100,
+      social: {
+        twitter: '@wesbos',
+        facebook: 'wesbos.developer'
+      }
+    };
+    const dev = Object.assign({}, wes)
+
+    // 第一題
+    // 互不影響
+    dev.social = null
+    console.log(wes)// 不變 {twitter...}; 
+
+    // 第二題
+    dev.social.facebook = null
+    console.log(wes.social) // {twitter:..., facebook:null}
+
+    const dev3 = JSON.parse(JSON.stringify(wes))
+    
     // and think we make a copy:
 
     // how do we take a copy instead?
