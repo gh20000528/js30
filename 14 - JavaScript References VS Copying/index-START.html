@@ -9,7 +9,7 @@
 
   <script>
     // start with strings, numbers and booleans
-    //字串 , 數字 , 布林
+    //字串 , 數字 , 布林 ,null , undifined , nan
     let a = 'A'
     let b = a
 
@@ -34,6 +34,8 @@
     let i = "A";
     h = "B", i = "C", g += h, g += i;
     console.log(g, h, i); //ABC , B ,C
+
+
     // Let's say we have an array
     const players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
 
@@ -158,18 +160,22 @@
     };
     const dev = Object.assign({}, wes)
 
-    // 第一題
-    // 互不影響
-    dev.social = null
-    console.log(wes)// 不變 {twitter...}; 
-
-    // 第二題
-    dev.social.facebook = null
-    console.log(wes.social) // {twitter:..., facebook:null}
-
-    const dev3 = JSON.parse(JSON.stringify(wes))
-    
     // and think we make a copy:
+    let aa = {
+      name: "han",
+      age: 23,
+      say: function () {
+        console.log('hi')
+      }
+    }
+
+    let qq = JSON.parse(JSON.stringify(aa))
+    // 複製物件但是會有深度不夠的問題
+    // aa 會有 say 方法 qq沒有
+    let xx =  Object.assign({}, aa)
+    // 複製物件可以複製function
+
+
 
     // how do we take a copy instead?
 

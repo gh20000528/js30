@@ -25,12 +25,43 @@
       <input type="submit" value="+ Add Item">
     </form>
   </div>
+  <!-- new 出來的todo -->
+  <!-- <li>
+    <input type="checkbox" data-index=1 id="item1" checked />
+    <label for="item$1">${plate.text}</label>
+  </li> -->
 
 <script>
   const addItems = document.querySelector('.add-items');
   const itemsList = document.querySelector('.plates');
-  const items = [];
+  // 取出來是字串轉成物件或是陣列
+  // items可能是空值
+  const items = JSON.parse(localStorage.getItem('item')) || [] 
 
+
+  function createList(data = [], dom) {
+    dom.innerHTML = data.map((plate, i) => {
+      return `
+        <li>
+          <input type="checkbox" data-index=${i} id="item${i}" ${plate.done ? 'checked' : ''} />
+          <label for="item${i}">${plate.text}</label>
+        </li>
+      `;
+    }).join('') //去除轉成字串逗點
+  }
+
+  createList(items , itemsList)
+
+  function addItem(e) {
+    e.preventDefault()
+    const text = (this.querySelector('[name=item]')).value//過濾選取器
+    items.push({ text , done: false }) // 更新js資料
+    localStorage.setItem('items', JSON.stringify(items)) //更新local資料
+    this.reset()
+    createList(items , itemsList) // 更新畫面
+  }
+
+  addItems.addEventListener('submit' , addItem)
 </script>
 
 
