@@ -8,7 +8,7 @@
 <body>
 
   <div class="hero">
-    <h1 contenteditable>🔥WOAH!</h1>
+    <h1 contenteditable class="h1">🔥WOAH!</h1>
   </div>
 
   <style>
@@ -36,6 +36,29 @@
   </style>
 
 <script>
+  (function(){
+
+    let length = 100
+    let text = document.querySelector('.h1')
+    document.querySelector('.hero').addEventListener('mousemove', function(e){
+
+      let { offsetX, offsetY} = e
+
+      if (e.target !== this) {
+        offsetX += e.target.offsetTop
+        offsetY += e.target.offsetLeft
+      }
+
+      let shadowX =  Math.floor(offsetX / this.offsetWidth * length) * 2 - length
+      let shadowY =  Math.floor(offsetY / this.offsetHeight * length) * 2 - length
+
+      text.style.textShadow = `
+        ${ shadowX * -1}px ${ shadowY * -1 }px 5px rgba( 255 ,0 ,0 ,.8)
+
+        `
+    })
+
+  })()
 </script>
 </body>
 </html>

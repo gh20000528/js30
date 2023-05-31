@@ -182,7 +182,27 @@
     // We will hopefully soon see the object ...spread
 
     // Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
+    var name = "悟空"
 
+    var hero = {
+    name: "悟空",
+    sayMyName: function () {
+      console.log(this.name)
+    },
+    }
+    hero.sayMyName() // 會印出什麼？為什麼？
+
+    const there = () => {
+    var name = "Hello"
+    console.log(this.name)
+    }
+    there() // 會印出什麼？為什麼？
+
+    function here() {
+    var name = "達爾"
+    console.log(this.name)
+    }
+    here()
   </script>
 
 </body>
