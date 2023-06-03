@@ -183,6 +183,30 @@
     </li>
   </ul>
 <script>
+  // querySelectorAll沒有map方法
+  const li = document.querySelectorAll('li')
+  
+  let a = Array.from(li).map( item => item )
+  let b = [].map.call(li , item => item)
+  let c = [].map.apply(li , [item => item])
+  let d = [...li].map( item => item.dataset.time ).map( time => {
+    // split選定的符號去做切個，切成陣列
+    console.log(time);
+    let [ min, sec ] = time.split(':')
+    return min * 60 + sec * 1
+  }).reduce( (prev, next) => prev + next , 0)
+  
+      console.log(d);
+
+  let sec = d % 60
+
+  let min = (d - sec) / 60 
+
+  let hour = Math.floor( min / 60)
+  min %= 60
+  
+
+  console.log(sec, min, hour);
 </script>
 </body>
 </html>
