@@ -60,6 +60,16 @@
     /*Compass: https://thenounproject.com/search/?q=compass&i=592352*/
   </style>
   <script>
+     const arrow = document.querySelector('.arrow')
+     const speed = document.querySelector('.speed-value')
+
+     let watchID = navigator.geolocation.watchPosition((position) => {
+      console.log(position);
+      speed.textContent = position.coords.speed
+      arrow.style.tranform = `rotate(${position.corrds.hading}deg)`
+     }, (err) =>{
+      navigator.geolocation.clearWatch(watchID)
+     })
   </script>
 </body>
 </html>
