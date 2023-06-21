@@ -7,43 +7,80 @@
 </head>
 <body class="bod">
 
+  
+  <style>
+    html {
+      box-sizing: border-box;
+    }
+    
+    *, *:before, *:after {
+      box-sizing: inherit;
+    }
+    
+    div {
+      width: 100%;
+      padding: 100px;
+    }
+    
+    .one {
+      background: thistle;
+    }
+    
+    .two {
+      background: mistyrose;
+    }
+    
+    .three {
+      background: coral;
+    }
+    </style>
+
   <div class="one">
     <div class="two">
       <div class="three">
       </div>
     </div>
   </div>
+  <button>button</button>
 
-<style>
-  html {
-    box-sizing: border-box;
-  }
+  <ul>
+    <li><a href="#">Button1</a></li>
+    <li><a href="#">Button2</a></li>
+    <li><a href="#">Button3</a></li>
+  </ul>
+  <script>
+      const button = document.querySelector('button')
+      button.addEventListener('click', buttonHandler , { capture: true, once: true}) // (事件, function, 設定檔 {預設為 false false})
 
-  *, *:before, *:after {
-    box-sizing: inherit;
-  }
+      const divs = document.querySelectorAll('div')
+      divs.forEach((dom) => {
+        dom.addEventListener('click', divHandler , { capture: true })
+      })
 
-  div {
-    width: 100%;
-    padding: 100px;
-  }
+      const as = document.querySelectorAll('a')
+      as.forEach((dom) => {
+        dom.addEventListener('click', aHandler, { capture: false, })
+      })
 
-  .one {
-    background: thistle;
-  }
+      const ul = document.querySelector('ul')
+      ul.addEventListener('click', ulHandler)
 
-  .two {
-    background: mistyrose;
-  }
+      function ulHandler(e){
+        console.log(e.target);
+      }
 
-  .three {
-    background: coral;
-  }
-</style>
+      function aHandler(e){
+        e.preventDefault();
+        console.log(this);
+      }
 
-<button></button>
-<script>
-
-</script>
+      function divHandler(e){
+        e.stopPropagation() //中斷事件的傳遞
+        console.log(this.className);
+      }
+      function buttonHandler(){
+        console.log(123);
+      }
+  </script>
 </body>
 </html>
