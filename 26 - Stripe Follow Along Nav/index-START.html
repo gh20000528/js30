@@ -75,6 +75,39 @@
     </ul>
   </nav>
 
+<script>
+  const menus = document.querySelectorAll('.cool > li')
+  const dropdownBackground = document.querySelector('.dropdownBackground')
+
+  function enterHandler(){
+    this.classList.add('trigger-enter')
+    setTimeout(()=>{
+      this.classList.contains('trigger-enter') && this.classList.add('trigger-enter-active')
+    },100)
+    const dropdown = this.querySelector('.dropdown')
+    const rect = dropdown.getBoundingClientRect()
+    const navrect = document.querySelector('.top').getBoundingClientRect()
+    console.log(rect);
+
+    dropdownBackground.classList.add('open')
+    dropdownBackground.style.width = rect.width + 'px'
+    dropdownBackground.style.height = rect.height + 'px'
+    dropdownBackground.style.top = (rect.top - navrect.top) + 'px'
+    dropdownBackground.style.left = rect.left + 'px'
+  }
+
+  function leaveHandler(){
+    this.classList.remove('trigger-enter')
+    this.classList.remove('trigger-enter-active')
+    dropdownBackground.classList.remove('open')
+  }
+
+  menus.forEach(menu => {
+    menu.addEventListener('mouseenter', enterHandler)
+    menu.addEventListener('mouseleave', leaveHandler)
+  })
+</script>
+
 <style>
   html {
     box-sizing: border-box;
@@ -219,9 +252,6 @@
   .button[href*=facebook] { background: #3B5998; }
   .button[href*=courses] { background: #ffc600; }
 </style>
-
-<script>
-</script>
 
 </body>
 </html>
