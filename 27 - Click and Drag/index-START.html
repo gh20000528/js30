@@ -36,6 +36,31 @@
   </div>
 
 <script>
+  const list = document.querySelector('.items')
+  let startX = 0
+
+  const startDrag = function(e){
+    list.classList.add('active')
+    startX = e.pageX
+  }
+  const dragHandler = function(e){
+    if(list.classList.contains('active')){
+      let move = e.pageX - startX
+      startX = e.pageX
+      list.scrollLeft -= move * 5
+    }
+  }
+  const stopDrag = function(){
+    list.classList.remove('active')
+  }
+
+  
+
+  list.addEventListener('mousedown', startDrag)
+  list.addEventListener('mousemove', dragHandler)
+  list.addEventListener('mouseup', stopDrag)
+  list.addEventListener('mouseleave', stopDrag)
+
 </script>
 
   </body>
