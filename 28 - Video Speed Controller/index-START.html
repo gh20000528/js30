@@ -16,6 +16,27 @@
   </div>
 
 <script>
+
+  const target = document.querySelector('.speed')
+  const bar = document.querySelector('.speed-bar')
+  const video = document.querySelector('video')
+
+  const moveHandler = function (e) {
+    const y = e.pageY - this.offsetTop
+    let percent = y / this.offsetHeight
+
+    const height = Math.round(percent * 100) + '%'
+    bar.style.height = height
+
+    percent = percent * 1.5 + 0.5
+    percent = percent > 2 ? 2 : percent < 0.5 ? 0.5 : percent
+
+    bar.textContent = Math.round(percent * 100) / 100 + 'x'
+
+    video.playbackRate = percent
+  }
+
+  target.addEventListener('mousemove', moveHandler)
 </script>
 </body>
 </html>
